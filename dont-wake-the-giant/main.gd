@@ -2,6 +2,7 @@ extends Node2D
 
 @export var awakeFor: float = 1.0 #how long the giant is awake for
 @export var sleepFor: float = 5.0 #sleep duration of the giant
+var delivered_count: int = 0
 var is_awake: bool = false #keeps track of giants sleep status
 
 # Called when the node enters the scene tree for the first time.
@@ -35,6 +36,9 @@ func _physics_process(float) -> void:
 		$UI/DropPrompt.visible = false
 		$DroppedFood.global_position = $Player.global_position
 		$DroppedFood.visible = true
+		delivered_count += 1
+		$UI/ScoreLabel.text = "Delivered: " + str(delivered_count) + "/3"
+		print(delivered_count)
 		
 func _on_giant_timer_timeout() -> void:
 	if is_awake:
