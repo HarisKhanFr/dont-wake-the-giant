@@ -29,7 +29,13 @@ func _physics_process(float) -> void:
 	if Input.is_action_just_pressed("restart"):
 		get_tree().reload_current_scene()
 		_restartGame()
-
+	
+	if Input.is_action_just_pressed("drop") and $UI/DropPrompt.visible:
+		$Player/HeldItem.visible = false
+		$UI/DropPrompt.visible = false
+		$DroppedFood.global_position = $Player.global_position
+		$DroppedFood.visible = true
+		
 func _on_giant_timer_timeout() -> void:
 	if is_awake:
 		$Giant.color = Color.GREEN
@@ -50,4 +56,13 @@ func _on_item_body_entered(body: Node2D) -> void:
 
 func _on_mouse_hole_body_entered(body: Node2D) -> void:
 	if body == $Player and $Player/HeldItem.visible == true:
-		print("DROPPPPPP")
+		$UI/DropPrompt.visible = true
+
+
+func _on_item_body_exited(body: Node2D) -> void:
+	if body == $Player :
+		$UI/DropPrompt.visible = false
+
+
+func _on_mouse_hole_body_exited(body: Node2D) -> void:
+	$UI/DropPrompt.visible = false # Replace with function body.

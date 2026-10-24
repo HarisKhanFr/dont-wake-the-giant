@@ -58,6 +58,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 80
 text = "Caught! Press R to retry"
 
+[node name="DropPrompt" type="Label" parent="UI" unique_id=305239745]
+visible = false
+offset_left = 293.0
+offset_top = 491.0
+offset_right = 827.0
+offset_bottom = 567.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 55
+text = "Press E to drop item"
+
 [node name="Item" type="Area2D" parent="." unique_id=1920614002]
 position = Vector2(293, 98)
 
@@ -69,6 +79,14 @@ position = Vector2(2, 2)
 scale = Vector2(0.63007814, 0.6382378)
 texture = ExtResource("3_h2yge")
 
+[node name="DroppedFood" type="Sprite2D" parent="." unique_id=486134467]
+visible = false
+position = Vector2(-15.000005, -17.999994)
+scale = Vector2(0.683, 0.692)
+texture = ExtResource("3_h2yge")
+
 [connection signal="body_entered" from="MouseHole" to="." method="_on_mouse_hole_body_entered"]
+[connection signal="body_exited" from="MouseHole" to="." method="_on_mouse_hole_body_exited"]
 [connection signal="timeout" from="GiantTimer" to="." method="_on_giant_timer_timeout"]
 [connection signal="body_entered" from="Item" to="." method="_on_item_body_entered"]
+[connection signal="body_exited" from="Item" to="." method="_on_item_body_exited"]
