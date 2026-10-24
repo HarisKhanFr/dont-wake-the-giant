@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bgm5stcd40yvc"]
 
 [ext_resource type="Script" uid="uid://cqtbv51y7hadt" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="Texture2D" uid="uid://df0mhpv817fob" path="res://New Piskel.png" id="2_onrkg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mghdt"]
 size = Vector2(24, 24)
@@ -16,3 +17,9 @@ color = Color(0, 0, 0, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=540518506]
 position = Vector2(12, 12)
 shape = SubResource("RectangleShape2D_mghdt")
+
+[node name="HeldItem" type="Sprite2D" parent="." unique_id=511047271]
+visible = false
+position = Vector2(13.000001, -17)
+scale = Vector2(0.68333334, 0.6916667)
+texture = ExtResource("2_onrkg")

@@ -39,3 +39,10 @@ func _on_giant_timer_timeout() -> void:
 		$Giant.color = Color.RED
 		$GiantTimer.start(awakeFor)
 		is_awake = true
+
+
+func _on_item_body_entered(body: Node2D) -> void:
+	if body == $Player:
+		print("Picked up")
+		$Player/HeldItem.visible = true
+		$Item.queue_free()

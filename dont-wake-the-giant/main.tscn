@@ -2,6 +2,13 @@
 
 [ext_resource type="Script" uid="uid://dm0hcsd1blaff" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://bgm5stcd40yvc" path="res://player.tscn" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://df0mhpv817fob" path="res://New Piskel.png" id="3_h2yge"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mghdt"]
+radius = 15.033297
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mghdt"]
+size = Vector2(137, 231)
 
 [node name="Main" type="Node2D" unique_id=536632652]
 script = ExtResource("1_0xm2m")
@@ -37,4 +44,29 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 80
 text = "Caught! Press R to retry"
 
+[node name="Item" type="Area2D" parent="." unique_id=1920614002]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Item" unique_id=1258863234]
+shape = SubResource("CircleShape2D_mghdt")
+
+[node name="Sprite2D" type="Sprite2D" parent="Item" unique_id=228876549]
+position = Vector2(2, 2)
+scale = Vector2(0.63007814, 0.6382378)
+texture = ExtResource("3_h2yge")
+
+[node name="MouseHole" type="Area2D" parent="." unique_id=621566346]
+position = Vector2(-22, 29)
+
+[node name="ColorRect" type="ColorRect" parent="MouseHole" unique_id=382363829]
+offset_left = 22.0
+offset_top = 35.0
+offset_right = 159.0
+offset_bottom = 266.0
+color = Color(0, 0, 0, 0.5411765)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseHole" unique_id=2005482469]
+position = Vector2(90.5, 150.5)
+shape = SubResource("RectangleShape2D_mghdt")
+
 [connection signal="timeout" from="GiantTimer" to="." method="_on_giant_timer_timeout"]
+[connection signal="body_entered" from="Item" to="." method="_on_item_body_entered"]
