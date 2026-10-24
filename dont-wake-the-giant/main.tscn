@@ -2,13 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dm0hcsd1blaff" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://bgm5stcd40yvc" path="res://player.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://bmcjpndeoui7m" path="res://item.tscn" id="3_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://df0mhpv817fob" path="res://New Piskel.png" id="3_h2yge"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mghdt"]
 size = Vector2(137, 231)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_mghdt"]
-radius = 15.033297
 
 [node name="Main" type="Node2D" unique_id=536632652]
 script = ExtResource("1_0xm2m")
@@ -77,22 +75,19 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "Delivered: 0/3"
 
-[node name="Item" type="Area2D" parent="." unique_id=1920614002]
+[node name="Item" parent="." unique_id=257131394 instance=ExtResource("3_1bvp3")]
 position = Vector2(293, 98)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Item" unique_id=1258863234]
-shape = SubResource("CircleShape2D_mghdt")
-
-[node name="Sprite2D" type="Sprite2D" parent="Item" unique_id=228876549]
-position = Vector2(2, 2)
-scale = Vector2(0.63007814, 0.6382378)
-texture = ExtResource("3_h2yge")
 
 [node name="DroppedFood" type="Sprite2D" parent="." unique_id=486134467]
 visible = false
 position = Vector2(-15.000005, -17.999994)
 scale = Vector2(0.683, 0.692)
 texture = ExtResource("3_h2yge")
+
+[node name="Item2" parent="." unique_id=409955613 instance=ExtResource("3_1bvp3")]
+position = Vector2(218, 309)
+
+[node name="DeliveredItems" type="Node2D" parent="." unique_id=1024103387]
 
 [connection signal="body_entered" from="MouseHole" to="." method="_on_mouse_hole_body_entered"]
 [connection signal="body_exited" from="MouseHole" to="." method="_on_mouse_hole_body_exited"]

@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://btej6d5co33kb"]
+
+[ext_resource type="Texture2D" uid="uid://df0mhpv817fob" path="res://New Piskel.png" id="1_cpkds"]
+
+[node name="DroppedFood" type="Sprite2D" unique_id=1996666556]
+scale = Vector2(0.69, 0.69)
+texture = ExtResource("1_cpkds")

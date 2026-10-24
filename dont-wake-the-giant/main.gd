@@ -2,6 +2,7 @@ extends Node2D
 
 @export var awakeFor: float = 1.0 #how long the giant is awake for
 @export var sleepFor: float = 5.0 #sleep duration of the giant
+var dropped_food_scene: PackedScene = preload("res://dropped_food.tscn")
 var delivered_count: int = 0
 var is_awake: bool = false #keeps track of giants sleep status
 
@@ -34,9 +35,10 @@ func _physics_process(float) -> void:
 	if Input.is_action_just_pressed("drop") and $UI/DropPrompt.visible:
 		$Player/HeldItem.visible = false
 		$UI/DropPrompt.visible = false
-		$DroppedFood.global_position = $Player.global_position
-		$DroppedFood.visible = true
 		delivered_count += 1
+		var new_food = dropped_food_scene.instantiate()
+		$DeliveredItems.add_child(new_food)
+		new_food.global_position = $Player.global_position
 		$UI/ScoreLabel.text = "Delivered: " + str(delivered_count) + "/3"
 		print(delivered_count)
 		
@@ -50,23 +52,9 @@ func _on_giant_timer_timeout() -> void:
 		$GiantTimer.start(awakeFor)
 		is_awake = true
 
-
-func _on_item_body_entered(body: Node2D) -> void:
-	if body == $Player:
-		print("Picked up")
-		$Player/HeldItem.visible = true
-		$Item.queue_free()
-
-
 func _on_mouse_hole_body_entered(body: Node2D) -> void:
 	if body == $Player and $Player/HeldItem.visible == true:
 		$UI/DropPrompt.visible = true
-
-
-func _on_item_body_exited(body: Node2D) -> void:
-	if body == $Player :
-		$UI/DropPrompt.visible = false
-
 
 func _on_mouse_hole_body_exited(body: Node2D) -> void:
 	$UI/DropPrompt.visible = false # Replace with function body.
