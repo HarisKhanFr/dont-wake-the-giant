@@ -4,11 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://bgm5stcd40yvc" path="res://player.tscn" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://df0mhpv817fob" path="res://New Piskel.png" id="3_h2yge"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_mghdt"]
-radius = 15.033297
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mghdt"]
 size = Vector2(137, 231)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mghdt"]
+radius = 15.033297
 
 [node name="Main" type="Node2D" unique_id=536632652]
 script = ExtResource("1_0xm2m")
@@ -16,6 +16,20 @@ script = ExtResource("1_0xm2m")
 [node name="ColorRect" type="ColorRect" parent="." unique_id=336157072]
 offset_right = 1152.0
 offset_bottom = 648.0
+
+[node name="MouseHole" type="Area2D" parent="." unique_id=621566346]
+position = Vector2(-22, 29)
+
+[node name="ColorRect" type="ColorRect" parent="MouseHole" unique_id=382363829]
+offset_left = 22.0
+offset_top = 35.0
+offset_right = 159.0
+offset_bottom = 266.0
+color = Color(0, 0, 0, 0.5411765)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseHole" unique_id=2005482469]
+position = Vector2(90.5, 150.5)
+shape = SubResource("RectangleShape2D_mghdt")
 
 [node name="Player" parent="." unique_id=2018673414 instance=ExtResource("1_ig7tw")]
 speed = 250
@@ -45,6 +59,7 @@ theme_override_font_sizes/font_size = 80
 text = "Caught! Press R to retry"
 
 [node name="Item" type="Area2D" parent="." unique_id=1920614002]
+position = Vector2(293, 98)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Item" unique_id=1258863234]
 shape = SubResource("CircleShape2D_mghdt")
@@ -54,19 +69,6 @@ position = Vector2(2, 2)
 scale = Vector2(0.63007814, 0.6382378)
 texture = ExtResource("3_h2yge")
 
-[node name="MouseHole" type="Area2D" parent="." unique_id=621566346]
-position = Vector2(-22, 29)
-
-[node name="ColorRect" type="ColorRect" parent="MouseHole" unique_id=382363829]
-offset_left = 22.0
-offset_top = 35.0
-offset_right = 159.0
-offset_bottom = 266.0
-color = Color(0, 0, 0, 0.5411765)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseHole" unique_id=2005482469]
-position = Vector2(90.5, 150.5)
-shape = SubResource("RectangleShape2D_mghdt")
-
+[connection signal="body_entered" from="MouseHole" to="." method="_on_mouse_hole_body_entered"]
 [connection signal="timeout" from="GiantTimer" to="." method="_on_giant_timer_timeout"]
 [connection signal="body_entered" from="Item" to="." method="_on_item_body_entered"]

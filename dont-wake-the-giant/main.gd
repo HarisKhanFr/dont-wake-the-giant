@@ -46,3 +46,8 @@ func _on_item_body_entered(body: Node2D) -> void:
 		print("Picked up")
 		$Player/HeldItem.visible = true
 		$Item.queue_free()
+
+
+func _on_mouse_hole_body_entered(body: Node2D) -> void:
+	if body == $Player and $Player/HeldItem.visible == true:
+		print("DROPPPPPP")
