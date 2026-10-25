@@ -8,10 +8,13 @@
 size = Vector2(137, 231)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pqory"]
-size = Vector2(558, 387)
+size = Vector2(600, 430)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5kaua"]
 size = Vector2(225.5, 558)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4326w"]
+size = Vector2(558, 387)
 
 [node name="Main" type="Node2D" unique_id=536632652]
 script = ExtResource("1_0xm2m")
@@ -133,6 +136,12 @@ position = Vector2(95.75, 20)
 shape = SubResource("RectangleShape2D_5kaua")
 
 [node name="SpawnedItems" type="Node2D" parent="." unique_id=1434024517]
+
+[node name="GiantBody" type="StaticBody2D" parent="." unique_id=988936738]
+position = Vector2(551, 193.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GiantBody" unique_id=118522483]
+shape = SubResource("RectangleShape2D_4326w")
 
 [connection signal="body_entered" from="MouseHole" to="." method="_on_mouse_hole_body_entered"]
 [connection signal="body_exited" from="MouseHole" to="." method="_on_mouse_hole_body_exited"]
