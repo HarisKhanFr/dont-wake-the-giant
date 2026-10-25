@@ -10,6 +10,23 @@ size = Vector2(137, 231)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pqory"]
 size = Vector2(600, 430)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.9577182, 0.9577182, 0.9577181, 0.6)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0071415594, 0.0071415626, 0.0071415496, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5kaua"]
 size = Vector2(225.5, 558)
 
@@ -109,11 +126,26 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 55
 text = "Press E to drop item"
 
+[node name="PanelContainer" type="PanelContainer" parent="UI" unique_id=1657412537]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -74.0
+offset_right = 236.0
+offset_bottom = -16.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_h2yge")
+
 [node name="ScoreLabel" type="Label" parent="UI" unique_id=880757643]
-offset_left = 2.0
-offset_top = 604.0
-offset_right = 202.0
-offset_bottom = 646.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 26.0
+offset_top = -66.0
+offset_right = 226.0
+offset_bottom = -24.0
+grow_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "Delivered: 0/3"
