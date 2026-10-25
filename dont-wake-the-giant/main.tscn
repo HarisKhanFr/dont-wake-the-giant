@@ -7,8 +7,11 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mghdt"]
 size = Vector2(137, 231)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pqory"]
+size = Vector2(558, 387)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5kaua"]
-size = Vector2(282, 512)
+size = Vector2(225.5, 558)
 
 [node name="Main" type="Node2D" unique_id=536632652]
 script = ExtResource("1_0xm2m")
@@ -32,14 +35,39 @@ position = Vector2(90.5, 150.5)
 shape = SubResource("RectangleShape2D_mghdt")
 
 [node name="Player" parent="." unique_id=2018673414 instance=ExtResource("1_ig7tw")]
+position = Vector2(80, 170)
 speed = 982
 
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=2119311366]
+zoom = Vector2(2, 2)
+
 [node name="Giant" type="ColorRect" parent="." unique_id=1373639065]
-offset_left = 390.0
-offset_top = 184.0
-offset_right = 740.0
-offset_bottom = 429.0
+offset_left = 272.0
+offset_right = 830.0
+offset_bottom = 387.0
 color = Color(0.16933584, 0.86448616, 0, 1)
+
+[node name="GiantTouch" type="Area2D" parent="Giant" unique_id=1548773036]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Giant/GiantTouch" unique_id=1709080352]
+position = Vector2(279, 193.5)
+shape = SubResource("RectangleShape2D_pqory")
+
+[node name="LeftEye" type="ColorRect" parent="Giant" unique_id=553502998]
+layout_mode = 0
+offset_left = 174.0
+offset_top = 182.0
+offset_right = 250.0
+offset_bottom = 201.0
+color = Color(0, 0, 0, 1)
+
+[node name="RightEye" type="ColorRect" parent="Giant" unique_id=135330526]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 182.0
+offset_right = 388.0
+offset_bottom = 202.0
+color = Color(0, 0, 0, 1)
 
 [node name="GiantTimer" type="Timer" parent="." unique_id=1081365877]
 wait_time = 5.0
@@ -79,10 +107,10 @@ theme_override_font_sizes/font_size = 55
 text = "Press E to drop item"
 
 [node name="ScoreLabel" type="Label" parent="UI" unique_id=880757643]
-offset_left = 461.0
-offset_top = 2.0
-offset_right = 661.0
-offset_bottom = 44.0
+offset_left = 2.0
+offset_top = 604.0
+offset_right = 202.0
+offset_bottom = 646.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "Delivered: 0/3"
@@ -101,11 +129,12 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemSpawnArea" unique_id=285195371]
-position = Vector2(11, 6)
+position = Vector2(95.75, 20)
 shape = SubResource("RectangleShape2D_5kaua")
 
 [node name="SpawnedItems" type="Node2D" parent="." unique_id=1434024517]
 
 [connection signal="body_entered" from="MouseHole" to="." method="_on_mouse_hole_body_entered"]
 [connection signal="body_exited" from="MouseHole" to="." method="_on_mouse_hole_body_exited"]
+[connection signal="body_entered" from="Giant/GiantTouch" to="." method="_on_giant_touch_body_entered"]
 [connection signal="timeout" from="GiantTimer" to="." method="_on_giant_timer_timeout"]

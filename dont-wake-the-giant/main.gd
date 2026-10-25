@@ -1,12 +1,13 @@
 extends Node2D
 
+@export var warning_time: float = 0.5
 @export var awakeFor: float = 1.0 #how long the giant is awake for
 @export var sleepFor: float = 5.0 #sleep duration of the giant
 var dropped_food_scene: PackedScene = preload("res://dropped_food.tscn")
 var item_scene: PackedScene = preload("res://item.tscn")
 var delivered_count: int = 0
 var is_awake: bool = false #keeps track of giants sleep status
-
+@onready var giant_start_position: Vector2 = $Giant.position
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var spawn_size = $ItemSpawnArea/CollisionShape2D.shape.size
@@ -25,6 +26,15 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+	var timer_is_running = not $GiantTimer.is_stopped()
+	var giant_is_sleeping = not is_awake
+	var almost_awake = $GiantTimer.time_left <= warning_time
+	if timer_is_running and giant_is_sleeping and almost_awake:
+		var shake_x = randf_range(-5.0, 5.0)
+		var shake_y = randf_range(-5.0, 5.0)
+		$Giant.position = giant_start_position + Vector2(shake_x, shake_y)
+	else:
+		$Giant.position = giant_start_position
 	
 func _pauseGame() -> void:
 	$GiantTimer.stop()
@@ -63,10 +73,14 @@ func _on_giant_timer_timeout() -> void:
 		$Giant.color = Color.GREEN
 		$GiantTimer.start(sleepFor)
 		is_awake = false
+		$Giant/LeftEye.size.y = 5
+		$Giant/RightEye.size.y = 5
 	else:
 		$Giant.color = Color.RED
 		$GiantTimer.start(awakeFor)
 		is_awake = true
+		$Giant/LeftEye.size.y = 25
+		$Giant/RightEye.size.y = 25
 
 func _on_mouse_hole_body_entered(body: Node2D) -> void:
 	if body == $Player and $Player/HeldItem.visible == true:
@@ -74,3 +88,9 @@ func _on_mouse_hole_body_entered(body: Node2D) -> void:
 
 func _on_mouse_hole_body_exited(body: Node2D) -> void:
 	$UI/DropPrompt.visible = false # Replace with function body.
+
+
+func _on_giant_touch_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.
+	if body == $Player and not is_awake:
+		$GiantTimer.start(warning_time)

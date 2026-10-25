@@ -9,3 +9,5 @@ func get_input():
 func _physics_process(delta):
 	get_input()
 	move_and_slide()
+	position.x = clamp(position.x, 0.0, 1128.0)
+	position.y = clamp(position.y, 0.0, 624.0)
