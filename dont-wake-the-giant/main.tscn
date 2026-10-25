@@ -56,10 +56,11 @@ shape = SubResource("RectangleShape2D_mghdt")
 
 [node name="Player" parent="." unique_id=2018673414 instance=ExtResource("1_ig7tw")]
 position = Vector2(80, 170)
-speed = 982
+speed = 250
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=2119311366]
-zoom = Vector2(2, 2)
+zoom = Vector2(1.5, 1.5)
+position_smoothing_enabled = true
 
 [node name="Giant" type="ColorRect" parent="." unique_id=1373639065]
 offset_left = 272.0

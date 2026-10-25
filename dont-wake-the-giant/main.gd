@@ -1,8 +1,8 @@
 extends Node2D
 
-@export var warning_time: float = 0.5
-@export var awakeFor: float = 1.0 #how long the giant is awake for
-@export var sleepFor: float = 5.0 #sleep duration of the giant
+@export var warning_time: float = 0.8
+@export var awakeFor: float = 2.5 #how long the giant is awake for
+@export var sleepFor: float = 6.0 #sleep duration of the giant
 var dropped_food_scene: PackedScene = preload("res://dropped_food.tscn")
 var item_scene: PackedScene = preload("res://item.tscn")
 var delivered_count: int = 0
